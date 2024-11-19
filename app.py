@@ -1,14 +1,18 @@
 from flask import Flask, render_template, Response
-import cv2
+from picamera2 import Picamera2
+import io
+import time
 
 app = Flask(__name__)
 
-camera = cv2.VideoCapture(0)  # Use 0 for USB camera or /dev/video0 for Pi Cam
+picam2 = Picamera2()
+picam2.configure(picam2.create_still_configuration())
 
 def generate_frames():
     while True:
-        success, frame = camera.read()
-        if not success:
+        # Capture an image
+        frame = picam2.capture_array()
+        if frame is None:
             break
         else:
             ret, buffer = cv2.imencode('.jpg', frame)
@@ -25,4 +29,5 @@ def video_feed():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
+    picam2.start()
     app.run(host='0.0.0.0', port=5000)
