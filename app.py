@@ -2,6 +2,7 @@ from flask import Flask, render_template, Response
 from picamera2 import Picamera2
 import io
 import time
+import cv2
 
 app = Flask(__name__)
 
@@ -19,6 +20,7 @@ def generate_frames():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    
 
 @app.route('/')
 def index():
