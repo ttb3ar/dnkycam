@@ -6,74 +6,66 @@
     <title>Pet Cam</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Root variables for easy customization */
         :root {
             --background-color: #f4f4f4;
             --primary-color: #333;
-            --accent-color: #FF6347; /* Tomato color for accents */
-            --max-width: 80%; /* Video width limit */
+            --accent-color: #FF6347;
         }
 
         body {
             margin: 0;
-            padding: 0;
             font-family: 'Roboto', sans-serif;
             background-color: var(--background-color);
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            color: var(--primary-color);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
         }
 
         h1 {
+            text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 500;
             color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-top: 20px;
         }
 
         #video {
-            width: var(--max-width);
+            display: block;
+            margin: 20px auto;
+            width: 80%;
             max-width: 100%;
             height: auto;
             border: 5px solid var(--primary-color);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        #video:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Media queries for responsive design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            #video {
-                width: 90%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            #video {
-                width: 100%;
-            }
         }
     </style>
 </head>
 <body>
+    <nav>
+        <div>Pet Cam</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+        </div>
+    </nav>
     <h1>Live Dinky Cam</h1>
     <img id="video" src="{{ url_for('video_feed') }}" alt="Video stream">
 </body>
